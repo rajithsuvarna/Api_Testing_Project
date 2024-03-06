@@ -13,8 +13,11 @@ let resources = [
 module.exports.getResourceByid = async function (req, res) {
   try {
     let resource = await resources.find(
-      (resource) => resource.id == req.params.id
+      (resource) => resource.id == parseInt(req.params.id)
     );
+    if (!resource) {
+      res.sendStatus(404);
+    }
     res.send(resource);
   } catch (err) {
     console.log(err);
@@ -24,7 +27,7 @@ module.exports.getResourceByid = async function (req, res) {
 
 module.exports.getAllResource = async function (req, res) {
   try {
-    res.send(resources);
+    res.json(resources);
   } catch (err) {
     console.log(err);
     return;
@@ -62,7 +65,7 @@ module.exports.updateResource = async function (req, res) {
 
 module.exports.deleteResource = async function (req, res) {
   try {
-    const resourceId = req.params.id;
+    const resourceId = parseInt(req.params.id);
     const resource = resources.find((resource) => resource.id == resourceId);
 
     const index = resources.indexOf(resource);
