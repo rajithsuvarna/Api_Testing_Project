@@ -36,3 +36,36 @@ describe("GET/:id", () => {
     expect(res.status).to.equal(404);
   });
 });
+
+describe("POST/", () => {
+  //post api test case
+  it("Should create a new resource", async () => {
+    const res = await request(app).post("/api/v1/resources/create").send({
+      name: "Java",
+      email: "java@gmail.com",
+      completed: true,
+      points: 40,
+    });
+    expect(res.status).to.equal(201);
+    expect(res.body).to.have.property("id");
+    expect(res.body.name).to.equal("Java");
+    expect(res.body.email).to.equal("java@gmail.com");
+    expect(res.body.completed).to.equal(true);
+    expect(res.body.points).to.equal(40);
+  });
+
+  //negative scenario test case
+  it("Should return 400 error when invalid data passed", async () => {
+    const res = await request(app).post("/api/v1/resources/create").send({
+      name1: "Java",
+      email1: "java@gmail.com",
+      completed1: true,
+      points1: 40,
+    });
+    expect(res.status).to.equal(400);
+  });
+});
+
+describe("PUT/", () => {});
+
+describe("DELETE/", () => {});

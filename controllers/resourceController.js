@@ -43,8 +43,12 @@ module.exports.create = async function (req, res) {
       points: req.body.points,
       completed: req.body.completed,
     };
-    resources.push(resource);
-    res.status(201).send(resource);
+    if (!resource.name) {
+      res.sendStatus(400);
+    } else {
+      resources.push(resource);
+      res.status(201).send(resource);
+    }
   } catch (err) {
     console.log(err);
     return;
