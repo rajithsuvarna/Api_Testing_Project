@@ -1,13 +1,13 @@
-# Testing Express.js API using Mocha & Chai
+# Testing Node.js API using Mocha & Chai
 
 
-### 1. Initialize the project:
+### 1. Install the required packages:
 ```
-npm init
+npm install
 ```
 
-### 2. Install the required packages:
+### 2. Run the test:
 ```
-npm install express mocha chai body-parser mongoose supertest nyc
+npm test
 ```
 
